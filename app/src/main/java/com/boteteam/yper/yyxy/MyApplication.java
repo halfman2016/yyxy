@@ -1,0 +1,30 @@
+package com.boteteam.yper.yyxy;
+
+import android.app.Application;
+
+import com.boteteam.yper.yyxy.Module.Teacher;
+
+/**
+ * Created by Feng Jiang on 2017/7/2.
+ */
+
+public class MyApplication extends Application {
+    private static MyApplication instance;
+    private static  Teacher teacher;
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        instance=this;
+    }
+    public static  MyApplication getInstance(){
+        return instance;
+    }
+
+    public static Teacher getTeacher() {
+        return teacher;
+    }
+
+    public static void setTeacher(Teacher teacher) {
+        MyApplication.teacher = teacher;
+    }
+}
