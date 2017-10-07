@@ -74,12 +74,12 @@ private String mode; //test 测试 release 输出
 //       mongoClient = new MongoClient(new ServerAddress("boteteam.com", 27017),Arrays.asList(credential));
        final MyApplication myApplication = MyApplication.getInstance();
        mode = myApplication.getMode();
-       if (mode == "test") {
+       if (mode.equals("test")) {
            DBase = "lizhitest";
            credential = MongoCredential.createScramSha1Credential("halfman", "lizhitest", "halfman21".toCharArray());
            mongoClient = new MongoClient(new ServerAddress("boteteam.com", 27017), Arrays.asList(credential));
            mongoDatabase = mongoClient.getDatabase("lizhitest");
-       } else if (mode == "release") {
+       } else if (mode.equals("release")) {
            credential = MongoCredential.createScramSha1Credential("halfman", "lizhi", "halfman21".toCharArray());
            mongoClient = new MongoClient(new ServerAddress("boteteam.com", 27017), Arrays.asList(credential));
            mongoDatabase = mongoClient.getDatabase("lizhi");
@@ -109,6 +109,52 @@ private String mode; //test 测试 release 输出
             }
         }
         return ret;
+    }
+
+    public boolean stuSidLogin(String sid, String pwd){
+
+        mongoCollection=mongoDatabase.getCollection("students");
+
+        List<BasicDBObject> objects = new ArrayList<BasicDBObject>();
+        objects.add(new BasicDBObject("sid", sid));
+        objects.add(new BasicDBObject("pwd",pwd));
+
+        BasicDBObject query=new BasicDBObject();
+
+        query.put("$and",objects);
+
+        MongoCursor cursor = mongoCollection.find(query).iterator();
+
+
+        while (cursor.hasNext()) {
+
+            Document doc= (Document) cursor.next();
+            Gson gson = new GsonBuilder().setDateFormat("MMM d, yyyy h:mm:ss a").create();
+
+            return true;
+
+        }
+
+        return false;
+    }
+
+    public Student getStudentBySid(String sid){
+
+        Student student=null;
+        mongoCollection =mongoDatabase.getCollection("students");
+        BasicDBObject basicDBObject=new BasicDBObject("sid",sid);
+        MongoCursor cursor=mongoCollection.find(basicDBObject).iterator();
+
+        while (cursor.hasNext())
+        {
+
+            Document doc=(Document) cursor.next();
+            Gson gson = new GsonBuilder().setDateFormat("MMM d, yyyy h:mm:ss a").create();
+            student=gson.fromJson(doc.toJson(),Student.class);
+
+        }
+
+        return student;
     }
 
     public Student stuLogin(String name, String pwd){
@@ -171,16 +217,21 @@ private String mode; //test 测试 release 输出
 
         while (cursor.hasNext())
         {
-
-
             Document doc=(Document) cursor.next();
-
             Gson gson = new GsonBuilder().setDateFormat("MMM d, yyyy h:mm:ss a").create();
             teacher=gson.fromJson(doc.toJson(),Teacher.class);
-
         }
-
         return teacher;
+    }
+
+    public void updateTeacher(Teacher teacher){
+        mongoCollection =mongoDatabase.getCollection("teachers");
+        Gson gson=new GsonBuilder().setDateFormat("MMM d, yyyy h:mm:ss a").create();
+        Document document= Document.parse(gson.toJson(teacher));
+        String temp=teacher.get_id().toString();
+        Document update=new Document();
+        update.put("$set",document);
+        mongoCollection.updateOne(Filters.eq("_id",temp),update);
     }
 
     public Subject getSubject(String _id){

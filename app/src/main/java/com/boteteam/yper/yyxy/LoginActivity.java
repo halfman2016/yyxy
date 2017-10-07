@@ -20,9 +20,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.boteteam.yper.yyxy.Module.GradeClass;
+import com.boteteam.yper.yyxy.Module.Student;
 import com.boteteam.yper.yyxy.Module.Teacher;
-import com.boteteam.yper.yyxy.Teacher.MainActivity;
+import com.boteteam.yper.yyxy.Teacher.teaMain;
 import com.boteteam.yper.yyxy.Student.stuMain;
+import com.boteteam.yper.yyxy.Utils.MDBTools;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.UUID;
 
 /**
  * A login screen that offers login via email/password.
@@ -33,13 +41,15 @@ public class LoginActivity extends AppCompatActivity  {
      * Id to identity READ_CONTACTS permission request.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
-
+    private MDBTools mdb=new MDBTools();
+    //教师教授班级的列表
+    private HashMap<GradeClass,String> gces=new HashMap<>();
     /**
      * A dummy authentication store containing known user names and passwords.
      * TODO: remove after connecting to a real authentication system.
      */
     private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "t01:12345", "stu:12345"
+            "t01:12345", "s01:12345"
     };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -199,26 +209,76 @@ public class LoginActivity extends AppCompatActivity  {
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
-        private final String mLoginame;
-        private final String mPassword;
+        private  String mLoginame;
+        private  String mPassword;
+        private  Teacher teacher;
+        private  Student student;
 
         UserLoginTask(String loginame, String password) {
             mLoginame = loginame;
             mPassword = password;
+            student = null;
+            teacher=null;
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
+            //  tid 老师登录 sid 学生登录，从一开始区分
+            String tmp=mLoginame.substring(0,1).toLowerCase();
+            mLoginame=tmp+mLoginame.substring(1);
+            boolean result=false;
 
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mLoginame)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
+            switch (tmp) {
+                case "t":
+                    result=mdb.teacherLogin(mLoginame,mPassword);
+                    if (result) {
+
+                        teacher = mdb.getTeacher(mLoginame);
+                        //写科目数据
+//                        HashMap<String,String> thm=new HashMap<>();
+//                        GradeClass nowclass=mdb.getGradeClassIsActiveByName("九1班");
+//
+//                        thm.put(nowclass.get_id().toString(),"语文");
+//                        nowclass=mdb.getGradeClassIsActiveByName("九2班");
+//                        thm.put(nowclass.get_id().toString(),"数学");
+//
+//                        teacher.setGcs(thm);
+//                        mdb.updateTeacher(teacher);
+                        HashMap<String,String> gc=teacher.getGcs();
+                        Iterator iter = gc.entrySet().iterator();
+                        while (iter.hasNext()) {
+                            HashMap.Entry entry = (HashMap.Entry) iter.next();
+                        Object key = entry.getKey();
+                        Object val = entry.getValue();
+                            gces.put(mdb.getGradeClass(UUID.fromString((String) key)), (String) val);
+                        }
+                        return result;
+
+                    }
+                    break;
+                case "s":
+                    result=mdb.stuSidLogin(mLoginame,mPassword);
+                    if (result) {
+
+                        student = mdb.getStudentBySid(mLoginame);
+
+                        return result;
+
+                    }
+                    break;
+                default:
+
+                    break;
             }
+//            for (String credential : DUMMY_CREDENTIALS) {
+//                String[] pieces = credential.split(":");
+//                if (pieces[0].equals(mLoginame)) {
+//                    // Account exists, return true if the password matches.
+//                    return pieces[1].equals(mPassword);
+//                }
+//            }
 
             // TODO: register the new account here.
             // 登录成功
@@ -237,16 +297,21 @@ public class LoginActivity extends AppCompatActivity  {
                 if ((mLoginame.substring(0,1).compareTo("t") * mLoginame.substring(0,1).compareTo("T"))==0)
 
                 {
-                    //启动教师版
-                    Teacher teacher=new Teacher(mLoginame);
+
+
+
                     MyApplication myApplication=MyApplication.getInstance();
                     myApplication.setTeacher(teacher);
+                    myApplication.setGcsubjects(gces);
                     Intent intent = new Intent();
-                    intent.setClass(LoginActivity.this, MainActivity.class);
+                    intent.setClass(LoginActivity.this, teaMain.class);
                     startActivity(intent);
                 }
                 else
                 {
+                    MyApplication myApplication=MyApplication.getInstance();
+                    myApplication.setStudent(student);
+
                     //启动学生版
                     Intent intent = new Intent();
                     intent.setClass(LoginActivity.this, stuMain.class);

@@ -17,7 +17,7 @@ public class TeamBase extends Object {
     private UUID _id= UUID.randomUUID();
     private Date createTime;
     private Date endTime;
-    private String Stats;
+    private String Stats;  //没有起作用
     private boolean isActive;  //是否有效
 
     public TeamBase(String name) {

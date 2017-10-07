@@ -2,8 +2,12 @@ package com.boteteam.yper.yyxy;
 
 import android.app.Application;
 
+import com.boteteam.yper.yyxy.Module.GradeClass;
 import com.boteteam.yper.yyxy.Module.Student;
 import com.boteteam.yper.yyxy.Module.Teacher;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Feng Jiang on 2017/7/2.
@@ -13,12 +17,22 @@ public class MyApplication extends Application {
     private static MyApplication instance;
     private static  Teacher teacher;
     private static Student student;
-    private static String mode;
+    private static HashMap<GradeClass,String> gcsubjects;
+    private static String mode="test";
     @Override
+
+
     public void onCreate() {
         super.onCreate();
         instance=this;
-        mode="test";
+    }
+
+    public static HashMap<GradeClass, String> getGcsubjects() {
+        return gcsubjects;
+    }
+
+    public static void setGcsubjects(HashMap<GradeClass, String> gcsubjects) {
+        MyApplication.gcsubjects = gcsubjects;
     }
 
     public static String getMode() {

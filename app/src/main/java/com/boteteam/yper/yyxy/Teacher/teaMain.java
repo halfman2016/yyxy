@@ -12,21 +12,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.boteteam.yper.yyxy.Module.GradeClass;
 import com.boteteam.yper.yyxy.Module.Teacher;
 import com.boteteam.yper.yyxy.MyApplication;
 import com.boteteam.yper.yyxy.R;
+import com.boteteam.yper.yyxy.SchoolModule.Assignment;
 
-public class MainActivity extends AppCompatActivity
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+public class teaMain extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    MyApplication myApplication=MyApplication.getInstance();
-
+  private   MyApplication myApplication=MyApplication.getInstance();
+  private   Teacher teacher=myApplication.getTeacher();
+    private List<Assignment> assignmentList=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_tea_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -49,9 +57,32 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         View headview=navigationView.getHeaderView(0);
         TextView teatxt=(TextView)headview.findViewById(R.id.teaname);
-        Teacher teacher=myApplication.getTeacher();
+        ListView listView= (ListView) findViewById(R.id.list_main_assignbz);
+
+        // 做数据
+        //作业数据
+        Assignment assignment=new Assignment();
+        assignment.setBzrid(teacher.get_id());
+        assignment.setBzrname(teacher.getName());
+
+
+        HashMap<GradeClass,String> gcesubject=myApplication.getGcsubjects();
         teatxt.setText(teacher.getName());
+        loaddata();
     }
+
+    private void loaddata()
+    {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        }).run();
+
+
+    }
+
 
     @Override
     public void onBackPressed() {

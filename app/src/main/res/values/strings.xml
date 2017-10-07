@@ -19,5 +19,16 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
     <string name="title_activity_stu_main">stuMain</string>
+
+  <!-- String related to tea_main -->
+    <string name="tea_main_list_bzrq">布置日期</string>
+    <string name="tea_main_list_yjrq">应交日期</string>
+    <string name="tea_main_list_bzzywb">布置作业时的文本</string>
+    <string name="tea_main_list_btntj">统计</string>
+    <string name="tea_main_list_btnyj">已交</string>
+    <string name="tea_main_list_btnpy">批阅</string>
+
+
 </resources>

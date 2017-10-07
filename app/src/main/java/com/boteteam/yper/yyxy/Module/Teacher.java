@@ -1,6 +1,9 @@
 package com.boteteam.yper.yyxy.Module;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -13,14 +16,15 @@ public class Teacher extends People {
     private UUID OnDutyGradeClassId;
     private String dutytitle;
     private String status; // 在职，不在职 // null 自动赋值
-    private String Subject; //科目，作业使用
+   // private String Subject; //科目，作业使用
+    private HashMap<String,String> gcs;  //作业班级，存储在mysql表中 教师任几门课的班级，班级-科目值对
 
-    public String getSubject() {
-        return Subject;
+    public HashMap<String, String> getGcs() {
+        return gcs;
     }
 
-    public void setSubject(String subject) {
-        Subject = subject;
+    public void setGcs(HashMap<String, String> gcs) {
+        this.gcs = gcs;
     }
 
     public String getStatus() {
