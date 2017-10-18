@@ -3,6 +3,8 @@ package com.boteteam.yper.yyxy.Teacher;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,10 +22,16 @@ import com.boteteam.yper.yyxy.Module.Teacher;
 import com.boteteam.yper.yyxy.MyApplication;
 import com.boteteam.yper.yyxy.R;
 import com.boteteam.yper.yyxy.SchoolModule.Assignment;
+import com.boteteam.yper.yyxy.Teacher.Adapter.TeaMainListAssignmentAdapter;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class teaMain extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -57,16 +65,42 @@ public class teaMain extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         View headview=navigationView.getHeaderView(0);
         TextView teatxt=(TextView)headview.findViewById(R.id.teaname);
-        ListView listView= (ListView) findViewById(R.id.list_main_assignbz);
+        RecyclerView listView= (RecyclerView) findViewById(R.id.list_main_assignbz);
 
         // 做数据
-        //作业数据
-        Assignment assignment=new Assignment();
-        assignment.setBzrid(teacher.get_id());
-        assignment.setBzrname(teacher.getName());
-
-
         HashMap<GradeClass,String> gcesubject=myApplication.getGcsubjects();
+        //作业数据
+        List<Assignment> assignmentList=new ArrayList<>();
+
+        Iterator iterator=gcesubject.entrySet().iterator();
+        while (iterator.hasNext())
+        {
+            HashMap.Entry entry= (HashMap.Entry) iterator.next();
+            GradeClass key= (GradeClass) entry.getKey();
+            String val= (String) entry.getValue();
+            Assignment assignment=new Assignment();
+            assignment.setBzrid(teacher.get_id());
+            assignment.setBzrname(teacher.getName());
+            assignment.setSubject(val);
+            assignment.setBj_id(key.get_id());
+            assignment.setBjname(key.getName());
+            assignment.setBztime(new Date());
+            Calendar gc=Calendar.getInstance();
+            gc.setTime(new Date());
+            gc.add(Calendar.DATE,1);
+            assignment.setJstime(gc.getTime());
+
+            assignmentList.add(assignment);
+        }
+
+
+        TeaMainListAssignmentAdapter teaMainListAssignmentAdapter=new TeaMainListAssignmentAdapter(assignmentList,getApplicationContext());
+        listView.setLayoutManager(new LinearLayoutManager(this));
+        listView.setAdapter(teaMainListAssignmentAdapter);
+
+
+
+
         teatxt.setText(teacher.getName());
         loaddata();
     }
