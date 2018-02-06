@@ -27,12 +27,12 @@ public class MySqlTools {
 
     public MySqlTools() {
         final MyApplication myApplication = MyApplication.getInstance();
-        mode = myApplication.getMode();
+        mode = MyApplication.getMode();
         if (mode == "test") {
-            dbUrl = "jdbc:mysql://boteteam.com:3306/lizhidytest?useUnicode=true&amp;characterEncoding=UTF-8";//根据实际情况变化
+            dbUrl = "jdbc:mysql://10.0.2.2:3306/lizhiyyxy?useUnicode=true&amp;characterEncoding=UTF-8";//根据实际情况变化
 
         } else if (mode == "release") {
-            dbUrl = "jdbc:mysql://boteteam.com:3306/lizhidy?useUnicode=true&amp;characterEncoding=UTF-8";//根据实际情况变化
+            dbUrl = "jdbc:mysql://boteteam.com:3306/lizhiyyxy?useUnicode=true&amp;characterEncoding=UTF-8";//根据实际情况变化
         }
     }
 
@@ -110,6 +110,20 @@ public class MySqlTools {
             e.printStackTrace();
         }
         return  i;
+    }
+
+    public int insertAssignMent() {
+        int i = 0;
+        String sql = "insert into assignment(assignteaname) values(?)";
+        try {
+            if (conn == null) return 0;
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, "test");
+            i = preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return i;
     }
 
 

@@ -1,10 +1,13 @@
 package com.boteteam.yper.yyxy.Teacher;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.boteteam.yper.yyxy.Module.GradeClass;
 import com.boteteam.yper.yyxy.Module.Teacher;
@@ -34,10 +38,30 @@ import java.util.List;
 import java.util.Map;
 
 public class teaMain extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
-  private   MyApplication myApplication=MyApplication.getInstance();
-  private   Teacher teacher=myApplication.getTeacher();
+    private MyApplication myApplication = MyApplication.getInstance();
+    private Teacher teacher = myApplication.getTeacher();
+    private Handler mhandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+                    break;
+                case 2:
+                    Log.d("mydata", "handler 2");
+                    break;
+                case 3:
+                    break;
+            }
+
+        }
+    };
+
+    private HashMap<GradeClass, String> km = myApplication.getGcsubjects();
+    
+
     private List<Assignment> assignmentList=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +71,7 @@ public class teaMain extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        fab.setOnClickListener(this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -64,11 +82,11 @@ public class teaMain extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View headview=navigationView.getHeaderView(0);
-        TextView teatxt=(TextView)headview.findViewById(R.id.teaname);
+        TextView teatxt = headview.findViewById(R.id.teaname);
         RecyclerView listView= (RecyclerView) findViewById(R.id.list_main_assignbz);
 
         // 做数据
-        HashMap<GradeClass,String> gcesubject=myApplication.getGcsubjects();
+        HashMap<GradeClass, String> gcesubject = MyApplication.getGcsubjects();
         //作业数据
         List<Assignment> assignmentList=new ArrayList<>();
 
@@ -98,11 +116,19 @@ public class teaMain extends AppCompatActivity
         listView.setLayoutManager(new LinearLayoutManager(this));
         listView.setAdapter(teaMainListAssignmentAdapter);
 
-
-
-
         teatxt.setText(teacher.getName());
         loaddata();
+
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                Message msg = new Message();
+                msg.what = 2;
+                mhandler.sendMessage(msg);
+
+            }
+        }.start();
     }
 
     private void loaddata()
@@ -173,5 +199,18 @@ public class teaMain extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.fab:
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                break;
+
+
+        }
+
     }
 }

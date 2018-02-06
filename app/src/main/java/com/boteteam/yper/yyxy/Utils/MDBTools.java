@@ -73,7 +73,7 @@ private String mode; //test 测试 release 输出
 //       credential = MongoCredential.createScramSha1Credential("halfman","lizhi","halfman21".toCharArray());
 //       mongoClient = new MongoClient(new ServerAddress("boteteam.com", 27017),Arrays.asList(credential));
        final MyApplication myApplication = MyApplication.getInstance();
-       mode = myApplication.getMode();
+       mode = MyApplication.getMode();
        if (mode.equals("test")) {
            DBase = "lizhitest";
            credential = MongoCredential.createScramSha1Credential("halfman", "lizhitest", "halfman21".toCharArray());
@@ -591,12 +591,7 @@ private String mode; //test 测试 release 输出
 
         Document filer=Document.parse("{_id:\""+photopic.get_id().toString()+"\"}");
        DeleteResult result= mongoCollection.deleteOne(Filters.eq("_id",photopic.get_id().toString()));
-        if(result.getDeletedCount()==1)
-        {
-            return true;
-        }
-        else
-        {return false;}
+        return result.getDeletedCount() == 1;
 
 
 

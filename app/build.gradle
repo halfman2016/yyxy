@@ -1,8 +1,9 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.0"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.boteteam.yper.yyxy"
         minSdkVersion 15
@@ -33,4 +34,8 @@ dependencies {
     compile files('src/libs/mongo-java-driver-3.4.0-SNAPSHOT.jar')
     compile files('src/libs/mysql-connector-java-5.0.8-bin.jar')
     compile files('src/libs/json-lib-2.4-jdk15.jar')
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }

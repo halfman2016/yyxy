@@ -15,7 +15,7 @@ import java.util.HashMap;
 
 public class MyApplication extends Application {
     private static MyApplication instance;
-    private static  Teacher teacher;
+    private static Teacher teacher;
     private static Student student;
     private static HashMap<GradeClass,String> gcsubjects;
     private static String mode="test";

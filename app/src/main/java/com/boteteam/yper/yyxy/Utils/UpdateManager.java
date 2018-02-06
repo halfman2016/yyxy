@@ -81,7 +81,7 @@ public class UpdateManager {
                 default:
                     break;
             }
-        };
+        }
     };
 
     public UpdateManager(Context context) {
@@ -121,7 +121,7 @@ public class UpdateManager {
 
         final LayoutInflater inflater = LayoutInflater.from(mContext);
         View v = inflater.inflate(R.layout.progress, null);
-        mProgress = (ProgressBar)v.findViewById(R.id.progress);
+        mProgress = v.findViewById(R.id.progress);
 
         builder.setView(v);
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {

@@ -4,13 +4,13 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-
 import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,11 +23,11 @@ import android.widget.TextView;
 import com.boteteam.yper.yyxy.Module.GradeClass;
 import com.boteteam.yper.yyxy.Module.Student;
 import com.boteteam.yper.yyxy.Module.Teacher;
-import com.boteteam.yper.yyxy.Teacher.teaMain;
 import com.boteteam.yper.yyxy.Student.stuMain;
+import com.boteteam.yper.yyxy.Teacher.teaMain;
 import com.boteteam.yper.yyxy.Utils.MDBTools;
+import com.boteteam.yper.yyxy.Utils.MySqlTools;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.UUID;
@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity  {
      */
     private static final int REQUEST_READ_CONTACTS = 0;
     private MDBTools mdb=new MDBTools();
-    //教师教授班级的列表
+    //教师教授班级的列表  gces保存在教师 mongodb中
     private HashMap<GradeClass,String> gces=new HashMap<>();
     /**
      * A dummy authentication store containing known user names and passwords.
@@ -62,11 +62,11 @@ public class LoginActivity extends AppCompatActivity  {
     private View mProgressView;
     private View mLoginFormView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         MyApplication myApplication=MyApplication.getInstance();
 
         // Set up the login form.
@@ -95,6 +95,11 @@ public class LoginActivity extends AppCompatActivity  {
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+        Log.e("mydata", "onCreate: hahaha");
+
+
+
     }
 
 
@@ -298,11 +303,12 @@ public class LoginActivity extends AppCompatActivity  {
 
                 {
 
-
-
+                    //写教师和教学配置
                     MyApplication myApplication=MyApplication.getInstance();
-                    myApplication.setTeacher(teacher);
-                    myApplication.setGcsubjects(gces);
+                    MyApplication.setTeacher(teacher);
+                    MyApplication.setGcsubjects(gces);
+
+
                     Intent intent = new Intent();
                     intent.setClass(LoginActivity.this, teaMain.class);
                     startActivity(intent);
@@ -310,7 +316,7 @@ public class LoginActivity extends AppCompatActivity  {
                 else
                 {
                     MyApplication myApplication=MyApplication.getInstance();
-                    myApplication.setStudent(student);
+                    MyApplication.setStudent(student);
 
                     //启动学生版
                     Intent intent = new Intent();
