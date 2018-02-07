@@ -1,5 +1,6 @@
 package com.boteteam.yper.yyxy.Teacher;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -40,29 +41,20 @@ import java.util.Map;
 public class teaMain extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
+
+    //窗口的数据容器定义
+    private ArrayList assignmentlist=new ArrayList();
+
     private MyApplication myApplication = MyApplication.getInstance();
     private Teacher teacher = myApplication.getTeacher();
-    private Handler mhandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case 1:
-                    break;
-                case 2:
-                    Log.d("mydata", "handler 2");
-                    break;
-                case 3:
-                    break;
-            }
+    private Handler mhandler;
 
-        }
-    };
 
     private HashMap<GradeClass, String> km = myApplication.getGcsubjects();
     
 
     private List<Assignment> assignmentList=new ArrayList<>();
+    @SuppressLint("HandlerLeak")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,6 +111,25 @@ public class teaMain extends AppCompatActivity
         teatxt.setText(teacher.getName());
         loaddata();
 
+
+
+        mhandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                switch (msg.what) {
+                    case 1:
+                        break;
+                    case 2:
+                        Log.d("mydata", "handler 2");
+                        break;
+                    case 3:
+                        break;
+                }
+
+            }
+        };
+
         new Thread() {
             @Override
             public void run() {
@@ -129,6 +140,8 @@ public class teaMain extends AppCompatActivity
 
             }
         }.start();
+
+
     }
 
     private void loaddata()
