@@ -11,7 +11,7 @@ import java.util.UUID;
  */
 
 public class Assignment {
-    private ArrayList<Timu> timus;
+    private ArrayList<Topic> topics;
     private ArrayList<String> pics;
     private UUID _id=UUID.randomUUID();
     private Date bztime;
@@ -49,12 +49,12 @@ public class Assignment {
         this.subject = subject;
     }
 
-    public ArrayList<Timu> getTimus() {
-        return timus;
+    public ArrayList<Topic> getTopics() {
+        return topics;
     }
 
-    public void setTimus(ArrayList<Timu> timus) {
-        this.timus = timus;
+    public void setTopics(ArrayList<Topic> topics) {
+        this.topics = topics;
     }
 
     public ArrayList<String> getPics() {

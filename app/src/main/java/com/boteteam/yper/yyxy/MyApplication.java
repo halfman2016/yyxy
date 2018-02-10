@@ -1,6 +1,7 @@
 package com.boteteam.yper.yyxy;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.boteteam.yper.yyxy.Module.GradeClass;
 import com.boteteam.yper.yyxy.Module.Student;
@@ -17,6 +18,7 @@ public class MyApplication extends Application {
     private static MyApplication instance;
     private static Teacher teacher;
     private static Student student;
+    private static Context context;
     private static HashMap<GradeClass,String> gcsubjects;
     private static String mode="test";
     @Override
@@ -25,6 +27,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance=this;
+        context=getApplicationContext();
     }
 
     public static HashMap<GradeClass, String> getGcsubjects() {
@@ -37,6 +40,10 @@ public class MyApplication extends Application {
 
     public static String getMode() {
         return mode;
+    }
+
+    public static Context getContext() {
+        return context;
     }
 
     public static  MyApplication getInstance(){

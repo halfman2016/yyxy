@@ -7,7 +7,7 @@ import java.util.UUID;
  * Created by Feng Jiang on 2017/9/30.
  */
 
-public class Timu {
+public class Topic {
     private UUID _id=UUID.randomUUID();
     private String timutxt; //题目文本
     private int timuno; //题号
