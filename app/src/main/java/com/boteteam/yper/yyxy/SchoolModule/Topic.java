@@ -8,13 +8,43 @@ import java.util.UUID;
  */
 
 public class Topic {
-    private UUID _id=UUID.randomUUID();
-    private String timutxt; //题目文本
-    private int timuno; //题号
+    private UUID _id=UUID.randomUUID();  //数据库里面是 varchar字段
+    private String topicontxt; //题目文本
+    private int topicno; //题号
     private String answer; //题目答案 ，保留字段
+    private int idtopic;//数据库id
+    private  int assignment_idassignment;
+
+    public int getAssignment_idassignment() {
+        return assignment_idassignment;
+    }
+
+    public void setAssignment_idassignment(int assignment_idassignment) {
+        this.assignment_idassignment = assignment_idassignment;
+    }
 
     public UUID get_id() {
         return _id;
+    }
+
+    public void set_id(UUID _id) {
+        this._id = _id;
+    }
+
+    public String getTopicontxt() {
+        return topicontxt;
+    }
+
+    public void setTopicontxt(String topicontxt) {
+        this.topicontxt = topicontxt;
+    }
+
+    public int getTopicno() {
+        return topicno;
+    }
+
+    public void setTopicno(int topicno) {
+        this.topicno = topicno;
     }
 
     public String getAnswer() {
@@ -25,19 +55,11 @@ public class Topic {
         this.answer = answer;
     }
 
-    public String getTimutxt() {
-        return timutxt;
+    public int getIdtopic() {
+        return idtopic;
     }
 
-    public void setTimutxt(String timutxt) {
-        this.timutxt = timutxt;
-    }
-
-    public int getTimuno() {
-        return timuno;
-    }
-
-    public void setTimuno(int timuno) {
-        this.timuno = timuno;
+    public void setIdtopic(int idtopic) {
+        this.idtopic = idtopic;
     }
 }
