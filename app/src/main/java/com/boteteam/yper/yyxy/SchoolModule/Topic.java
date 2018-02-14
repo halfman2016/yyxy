@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public class Topic {
     private UUID _id=UUID.randomUUID();  //数据库里面是 varchar字段
-    private String topicontxt; //题目文本
+    private String topicon; //题目文本
     private int topicno; //题号
     private String answer; //题目答案 ，保留字段
     private int idtopic;//数据库id
@@ -31,12 +31,12 @@ public class Topic {
         this._id = _id;
     }
 
-    public String getTopicontxt() {
-        return topicontxt;
+    public String getTopicon() {
+        return topicon;
     }
 
-    public void setTopicontxt(String topicontxt) {
-        this.topicontxt = topicontxt;
+    public void setTopicontxt(String topicon) {
+        this.topicon = topicon;
     }
 
     public int getTopicno() {
