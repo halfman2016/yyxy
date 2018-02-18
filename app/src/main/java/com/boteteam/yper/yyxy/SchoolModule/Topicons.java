@@ -7,7 +7,7 @@ import java.util.UUID;
  * Created by Feng Jiang on 2017/9/30.
  */
 
-public class Topic {
+public class Topicons {
     private UUID _id=UUID.randomUUID();  //数据库里面是 varchar字段
     private String topicon; //题目文本
     private int topicno; //题号

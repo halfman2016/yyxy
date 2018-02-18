@@ -27,7 +27,7 @@ public class MySqlTools {
 
     public MySqlTools() {
         final MyApplication myApplication = MyApplication.getInstance();
-        mode = MyApplication.getMode();
+        mode = myApplication.getMode();
         if (mode == "test") {
             dbUrl = "jdbc:mysql://10.0.2.2:3306/lizhiyyxy?useUnicode=true&amp;characterEncoding=UTF-8";//根据实际情况变化
 

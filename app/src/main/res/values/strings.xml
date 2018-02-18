@@ -19,10 +19,13 @@
 
     <string name="title_activity_stu_main">stuMain</string>
 
-  <!-- String related to tea_main -->
+    <!-- String related to tea_main -->
     <string name="tea_main_list_btntj">统计</string>
     <string name="tea_main_list_btnyj">已交</string>
     <string name="tea_main_list_btnpy">批阅</string>
+    <string name="title_activity_tea_assign_choose_gc">teaAssignChooseGc</string>
 
+    <string name="gcchoosenext">下一步</string>
+    <string name="gcchoosetitile">请选择班级</string>
 
 </resources>

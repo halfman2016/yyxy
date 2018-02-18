@@ -10,22 +10,25 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <uses-feature android:name="android.hardware.camera" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/sunlogo"
         android:label="@string/app_name"
-        android:name=".MyApplication"
         android:roundIcon="@drawable/sunlogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".Teacher.teaMain"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login">
@@ -38,7 +41,11 @@
         <activity
             android:name=".Student.stuMain"
             android:label="@string/title_activity_stu_main"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Teacher.teaAssignChooseGc"
+            android:label="@string/title_activity_tea_assign_choose_gc"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

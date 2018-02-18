@@ -305,8 +305,8 @@ public class LoginActivity extends AppCompatActivity  {
 
                     //写教师和教学配置
                     MyApplication myApplication=MyApplication.getInstance();
-                    MyApplication.setTeacher(teacher);
-                    MyApplication.setGcsubjects(gces);
+                    myApplication.setTeacher(teacher);
+                    myApplication.setGcsubjects(gces);
 
 
                     Intent intent = new Intent();
@@ -316,7 +316,7 @@ public class LoginActivity extends AppCompatActivity  {
                 else
                 {
                     MyApplication myApplication=MyApplication.getInstance();
-                    MyApplication.setStudent(student);
+                    myApplication.setStudent(student);
 
                     //启动学生版
                     Intent intent = new Intent();

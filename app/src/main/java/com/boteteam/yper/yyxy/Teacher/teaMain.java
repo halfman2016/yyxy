@@ -1,6 +1,7 @@
 package com.boteteam.yper.yyxy.Teacher;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -78,7 +79,7 @@ public class teaMain extends AppCompatActivity
         RecyclerView listView= (RecyclerView) findViewById(R.id.list_main_assignbz);
 
         // 做数据
-        HashMap<GradeClass, String> gcesubject = MyApplication.getGcsubjects();
+        HashMap<GradeClass, String> gcesubject = myApplication.getGcsubjects();
         //作业数据
         List<Assignment> assignmentList=new ArrayList<>();
 
@@ -218,8 +219,11 @@ public class teaMain extends AppCompatActivity
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.fab:
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                 //       .setAction("Action", null).show();
+                Intent intent=new Intent();
+                intent.setClass(this,teaAssignChooseGc.class);
+                startActivity(intent);
                 break;
 
 

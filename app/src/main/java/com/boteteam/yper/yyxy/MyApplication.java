@@ -30,19 +30,19 @@ public class MyApplication extends Application {
         context=getApplicationContext();
     }
 
-    public static HashMap<GradeClass, String> getGcsubjects() {
+    public  HashMap<GradeClass, String> getGcsubjects() {
         return gcsubjects;
     }
 
-    public static void setGcsubjects(HashMap<GradeClass, String> gcsubjects) {
+    public  void setGcsubjects(HashMap<GradeClass, String> gcsubjects) {
         MyApplication.gcsubjects = gcsubjects;
     }
 
-    public static String getMode() {
+    public  String getMode() {
         return mode;
     }
 
-    public static Context getContext() {
+    public  Context getContext() {
         return context;
     }
 
@@ -50,19 +50,19 @@ public class MyApplication extends Application {
         return instance;
     }
 
-    public static Student getStudent() {
+    public  Student getStudent() {
         return student;
     }
 
-    public static void setStudent(Student student) {
+    public  void setStudent(Student student) {
         MyApplication.student = student;
     }
 
-    public static Teacher getTeacher() {
+    public  Teacher getTeacher() {
         return teacher;
     }
 
-    public static void setTeacher(Teacher teacher) {
+    public  void setTeacher(Teacher teacher) {
         MyApplication.teacher = teacher;
     }
 }

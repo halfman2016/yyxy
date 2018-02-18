@@ -73,7 +73,7 @@ private String mode; //test 测试 release 输出
 //       credential = MongoCredential.createScramSha1Credential("halfman","lizhi","halfman21".toCharArray());
 //       mongoClient = new MongoClient(new ServerAddress("boteteam.com", 27017),Arrays.asList(credential));
        final MyApplication myApplication = MyApplication.getInstance();
-       mode = MyApplication.getMode();
+       mode = myApplication.getMode();
        if (mode.equals("test")) {
            DBase = "lizhitest";
            credential = MongoCredential.createScramSha1Credential("halfman", "lizhitest", "halfman21".toCharArray());
