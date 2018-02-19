@@ -6,6 +6,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.CheckBox
 import android.widget.LinearLayout
 import com.boteteam.yper.yyxy.Module.GradeClass
@@ -28,10 +29,28 @@ class teaAssignChooseGc() : AppCompatActivity(),View.OnClickListener {
 
     override fun onClick(p0: View?) {
 
-        if (p0 != null) {
-            Log.d("myapp", p0.id.toString())
+        if(p0 is CheckBox)
+        {
+            var b:CheckBox=p0
+            Log.d("myapp",b.text.toString())
+        }
+        if (p0 is Button)
+        {
+            var checks:ArrayList<CheckBox>?=null
+            var i=0
+          while (i<checkboxs.childCount)
+          {
+            var ch=  checkboxs.getChildAt(i) as CheckBox
+            if(ch.isChecked) {
+                checks?.add(ch)
+            }
+              i++
+          }
+            Log.d("myapp",checks.toString())
+           Log.d("myapp",checkboxs.childCount.toString())
         }
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,8 +63,7 @@ class teaAssignChooseGc() : AppCompatActivity(),View.OnClickListener {
         for (gc in gcs)
         {
             var checkBox=CheckBox(this);
-            checkBox.text=gc.key.name
-            checkBox.id= 923423423.toInt()
+            checkBox.text=gc.key.name + ":" + gc.value
             checkBox.setOnClickListener(this)
             checkboxs.addView(checkBox)
 
