@@ -1,5 +1,6 @@
 package com.boteteam.yper.yyxy.Teacher
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Parcel
@@ -12,6 +13,7 @@ import android.widget.LinearLayout
 import com.boteteam.yper.yyxy.Module.GradeClass
 import com.boteteam.yper.yyxy.MyApplication
 import com.boteteam.yper.yyxy.R
+import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.listitem_main_assignbz.view.*
 import kotlinx.android.synthetic.main.teassignchoosegc.*
 
@@ -28,27 +30,41 @@ class teaAssignChooseGc() : AppCompatActivity(),View.OnClickListener {
     //教授班级，教授科目
 
     override fun onClick(p0: View?) {
+        var checks= arrayListOf<CheckBox>()
 
-        if(p0 is CheckBox)
-        {
-            var b:CheckBox=p0
-            Log.d("myapp",b.text.toString())
-        }
-        if (p0 is Button)
-        {
-            var checks:ArrayList<CheckBox>?=null
-            var i=0
-          while (i<checkboxs.childCount)
-          {
-            var ch=  checkboxs.getChildAt(i) as CheckBox
-            if(ch.isChecked) {
-                checks?.add(ch)
+         when (p0) {
+            is CheckBox -> {
+
+                var b: CheckBox = p0
+                Log.d("myapp", b.text.toString())
             }
-              i++
-          }
-            Log.d("myapp",checks.toString())
-           Log.d("myapp",checkboxs.childCount.toString())
+            is Button -> {
+
+                var i = 0
+                while (i < checkboxs.childCount) {
+                    var ch = checkboxs.getChildAt(i) as CheckBox
+                    if (ch.isChecked) {
+                        checks.add(ch)
+                    }
+                    i++
+                }
+                Log.d("myapp", checks.toString())
+                Log.d("myapp", checkboxs.childCount.toString())
+
+                var intent=Intent();
+                intent.setClass(this,teaAssignAssign::class.java);
+                var gson=GsonBuilder().create();
+                var gcstr:String=""
+                for(gc in gcs)
+                {
+                    gcstr=gson.toJson(gc.key)
+                }
+                intent.putExtra("gclasses",gcstr)
+                startActivity(intent)
+            }
+
         }
+
     }
 
 
