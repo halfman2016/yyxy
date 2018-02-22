@@ -23,6 +23,7 @@ class teaAssignChooseGc() : AppCompatActivity(),View.OnClickListener {
     private var myapplication=MyApplication.getInstance();
     private var teacher=myapplication.teacher
     private var gcs=myapplication.gcsubjects
+    private var selgcs= arrayListOf<GradeClass>()
 
     constructor(parcel: Parcel) : this() {
 
@@ -44,7 +45,7 @@ class teaAssignChooseGc() : AppCompatActivity(),View.OnClickListener {
                 while (i < checkboxs.childCount) {
                     var ch = checkboxs.getChildAt(i) as CheckBox
                     if (ch.isChecked) {
-                        checks.add(ch)
+                        gcs.containsValue(ch.text)
                     }
                     i++
                 }

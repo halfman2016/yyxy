@@ -21,6 +21,7 @@ public class MyApplication extends Application {
     private static Context context;
     private static HashMap<GradeClass,String> gcsubjects;
     private static String mode="test";
+    private static ArrayList<GradeClass> gcs;
     @Override
 
 
@@ -36,6 +37,22 @@ public class MyApplication extends Application {
 
     public  void setGcsubjects(HashMap<GradeClass, String> gcsubjects) {
         MyApplication.gcsubjects = gcsubjects;
+    }
+
+    public  void setContext(Context context) {
+        MyApplication.context = context;
+    }
+
+    public  void setMode(String mode) {
+        MyApplication.mode = mode;
+    }
+
+    public  ArrayList<GradeClass> getGcs() {
+        return gcs;
+    }
+
+    public  void setGcs(ArrayList<GradeClass> gcs) {
+        MyApplication.gcs = gcs;
     }
 
     public  String getMode() {
