@@ -21,7 +21,7 @@ public class MyApplication extends Application {
     private static Context context;
     private static HashMap<GradeClass,String> gcsubjects;
     private static String mode="test";
-    private static ArrayList<GradeClass> gcs;
+    private static ArrayList<GradeClass> gcs;  //选上班级和科目列表
     @Override
 
 
