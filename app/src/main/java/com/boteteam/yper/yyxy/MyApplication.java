@@ -6,6 +6,7 @@ import android.content.Context;
 import com.boteteam.yper.yyxy.Module.GradeClass;
 import com.boteteam.yper.yyxy.Module.Student;
 import com.boteteam.yper.yyxy.Module.Teacher;
+import com.boteteam.yper.yyxy.SchoolModule.GradeClassSubject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,7 +22,7 @@ public class MyApplication extends Application {
     private static Context context;
     private static HashMap<GradeClass,String> gcsubjects;
     private static String mode="test";
-    private static ArrayList<GradeClass> gcs;  //选上班级和科目列表
+    private static ArrayList<GradeClassSubject> gcs;  //选上班级和科目列表
     @Override
 
 
@@ -47,11 +48,11 @@ public class MyApplication extends Application {
         MyApplication.mode = mode;
     }
 
-    public  ArrayList<GradeClass> getGcs() {
+    public static ArrayList<GradeClassSubject> getGcs() {
         return gcs;
     }
 
-    public  void setGcs(ArrayList<GradeClass> gcs) {
+    public static void setGcs(ArrayList<GradeClassSubject> gcs) {
         MyApplication.gcs = gcs;
     }
 

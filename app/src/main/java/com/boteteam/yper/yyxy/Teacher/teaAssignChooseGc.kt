@@ -13,6 +13,7 @@ import android.widget.LinearLayout
 import com.boteteam.yper.yyxy.Module.GradeClass
 import com.boteteam.yper.yyxy.MyApplication
 import com.boteteam.yper.yyxy.R
+import com.boteteam.yper.yyxy.SchoolModule.GradeClassSubject
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.listitem_main_assignbz.view.*
 import kotlinx.android.synthetic.main.teassignchoosegc.*
@@ -23,7 +24,7 @@ class teaAssignChooseGc() : AppCompatActivity(),View.OnClickListener {
     private var myapplication=MyApplication.getInstance();
     private var teacher=myapplication.teacher
     private var gcs=myapplication.gcsubjects
-    private var selgcs= arrayListOf<GradeClass>()
+    private var selgcs= arrayListOf<GradeClassSubject>()
 
     constructor(parcel: Parcel) : this() {
 
@@ -46,6 +47,7 @@ class teaAssignChooseGc() : AppCompatActivity(),View.OnClickListener {
                     var ch = checkboxs.getChildAt(i) as CheckBox
                     if (ch.isChecked) {
                         gcs.containsValue(ch.text)
+
                     }
                     i++
                 }
@@ -54,13 +56,7 @@ class teaAssignChooseGc() : AppCompatActivity(),View.OnClickListener {
 
                 var intent=Intent();
                 intent.setClass(this,teaAssignAssign::class.java);
-                var gson=GsonBuilder().create();
-                var gcstr:String=""
-                for(gc in gcs)
-                {
-                    gcstr=gson.toJson(gc.key)
-                }
-                intent.putExtra("gclasses",gcstr)
+                // myApplication 赋值
                 startActivity(intent)
             }
 
@@ -82,6 +78,7 @@ class teaAssignChooseGc() : AppCompatActivity(),View.OnClickListener {
             var checkBox=CheckBox(this);
             checkBox.text=gc.key.name + ":" + gc.value
             checkBox.setOnClickListener(this)
+
             checkboxs.addView(checkBox)
 
         }
