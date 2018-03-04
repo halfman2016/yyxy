@@ -18,13 +18,13 @@ import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.listitem_main_assignbz.view.*
 import kotlinx.android.synthetic.main.teassignchoosegc.*
 
-class teaAssignChooseGc() : AppCompatActivity(),View.OnClickListener {
+class teaAssignChooseGc() : AppCompatActivity(), View.OnClickListener {
 
 
-    private var myapplication=MyApplication.getInstance();
-    private var teacher=myapplication.teacher
-    private var gcs=myapplication.gcsubjects
-    private var selgcs= arrayListOf<GradeClassSubject>()
+    private var myapplication = MyApplication.getInstance();
+    private var teacher = myapplication.teacher
+    private var gcs = myapplication.gcsubjects
+    private var selgcs = arrayListOf<GradeClassSubject>()
 
     constructor(parcel: Parcel) : this() {
 
@@ -32,9 +32,9 @@ class teaAssignChooseGc() : AppCompatActivity(),View.OnClickListener {
     //教授班级，教授科目
 
     override fun onClick(p0: View?) {
-        var checks= arrayListOf<CheckBox>()
+        var checks = arrayListOf<CheckBox>()
 
-         when (p0) {
+        when (p0) {
             is CheckBox -> {
 
                 var b: CheckBox = p0
@@ -43,21 +43,38 @@ class teaAssignChooseGc() : AppCompatActivity(),View.OnClickListener {
             is Button -> {
 
                 var i = 0
+                var j=0
+                selgcs.clear()
+
                 while (i < checkboxs.childCount) {
                     var ch = checkboxs.getChildAt(i) as CheckBox
                     if (ch.isChecked) {
-                        gcs.containsValue(ch.text)
+                        //选中的状态
+                        var chars = ch.text.split(":")
+                        var gcstemp : GradeClassSubject=GradeClassSubject()
+                        gcstemp.gradeclassname=chars.get(0)
+                        gcstemp.subject=chars.get(1)
+                        selgcs.add(gcstemp)
 
+
+                        j++
                     }
+
                     i++
                 }
-                Log.d("myapp", checks.toString())
-                Log.d("myapp", checkboxs.childCount.toString())
 
-                var intent=Intent();
-                intent.setClass(this,teaAssignAssign::class.java);
-                // myApplication 赋值
-                startActivity(intent)
+
+                if (j > 0) {
+
+                    myapplication.gcs=selgcs
+
+                    var intent = Intent();
+                    intent.setClass(this, teaAssignAssign::class.java);
+                    // myApplication 赋值
+                    startActivity(intent)
+                } else {
+                    Log.d("myapp", "请选中至少一个")
+                }
             }
 
         }
@@ -71,19 +88,18 @@ class teaAssignChooseGc() : AppCompatActivity(),View.OnClickListener {
         btngchoosenext.setOnClickListener(this)
         loaddata()
     }
-    fun loaddata(){
 
-        for (gc in gcs)
-        {
-            var checkBox=CheckBox(this);
-            checkBox.text=gc.key.name + ":" + gc.value
+    fun loaddata() {
+
+        for (gc in gcs) {
+            var checkBox = CheckBox(this);
+            checkBox.text = gc.key.name + ":" + gc.value
             checkBox.setOnClickListener(this)
 
             checkboxs.addView(checkBox)
 
         }
     }
-
 
 
 }

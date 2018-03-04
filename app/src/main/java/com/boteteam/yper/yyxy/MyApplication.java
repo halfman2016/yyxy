@@ -48,11 +48,11 @@ public class MyApplication extends Application {
         MyApplication.mode = mode;
     }
 
-    public static ArrayList<GradeClassSubject> getGcs() {
+    public  ArrayList<GradeClassSubject> getGcs() {
         return gcs;
     }
 
-    public static void setGcs(ArrayList<GradeClassSubject> gcs) {
+    public  void setGcs(ArrayList<GradeClassSubject> gcs) {
         MyApplication.gcs = gcs;
     }
 
