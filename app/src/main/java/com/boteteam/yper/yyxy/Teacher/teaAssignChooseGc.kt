@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.LinearLayout
+import android.widget.Toast
 import com.boteteam.yper.yyxy.Module.GradeClass
 import com.boteteam.yper.yyxy.MyApplication
 import com.boteteam.yper.yyxy.R
@@ -73,6 +74,7 @@ class teaAssignChooseGc() : AppCompatActivity(), View.OnClickListener {
                     // myApplication 赋值
                     startActivity(intent)
                 } else {
+                    Toast.makeText(this,"请至少选择一个",Toast.LENGTH_SHORT).show()
                     Log.d("myapp", "请选中至少一个")
                 }
             }
