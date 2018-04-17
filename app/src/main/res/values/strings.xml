@@ -27,5 +27,6 @@
 
     <string name="gcchoosenext">下一步</string>
     <string name="gcchoosetitile">请选择班级</string>
+    <string name="tltitle">自由出题</string>
 
 </resources>

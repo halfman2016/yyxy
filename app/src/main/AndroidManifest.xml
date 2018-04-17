@@ -46,7 +46,8 @@
             android:name=".Teacher.teaAssignChooseGc"
             android:label="@string/title_activity_tea_assign_choose_gc"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Teacher.teaAssignAssign"></activity>
+        <activity android:name=".Teacher.teaAssignAssign"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
