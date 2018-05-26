@@ -26,21 +26,16 @@ android {
 
 dependencies {
     implementation 'com.google.firebase:firebase-messaging:11.6.2'
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile 'com.android.support:appcompat-v7:26.+'
-    compile 'com.android.support:design:26.+'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    testCompile 'junit:junit:4.12'
-    compile 'com.google.code.gson:gson:2.8.0'
-    compile 'com.qiniu:qiniu-java-sdk:7.1.3'
-    compile files('src/libs/mongo-java-driver-3.4.0-SNAPSHOT.jar')
-    compile files('src/libs/mysql-connector-java-5.0.8-bin.jar')
-    compile files('src/libs/json-lib-2.4-jdk15.jar')
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:26.+'
+    implementation 'com.android.support:design:26.+'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.google.code.gson:gson:2.8.0'
+    implementation 'com.qiniu:qiniu-java-sdk:7.1.3'
+    implementation files('src/libs/mongo-java-driver-3.4.0-SNAPSHOT.jar')
+    implementation files('src/libs/mysql-connector-java-5.0.8-bin.jar')
+    implementation files('src/libs/json-lib-2.4-jdk15.jar')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }
 repositories {
     mavenCentral()
