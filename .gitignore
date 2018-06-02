@@ -6,8 +6,21 @@
 .DS_Store
 /build
 /captures
+#built files
+*.apk
+*.ap_
+
+*.dex
+*.class
+.gradle/
+build/
+local.properties
+proguard/
+*.log
+.idea/
+
+
 .externalNativeBuild
-libs/
 .idea/modules.xml
 .idea/caches/build_file_checksums.ser
 /.idea/caches
